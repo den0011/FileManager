@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>res/filemanager.png</file>
+        <file>res/update.png</file>
+        <file>res/add-folder.png</file>
+        <file>res/copy-folder.png</file>
+        <file>res/data-transfer.png</file>
+        <file>res/remove.png</file>
+        <file>res/rename-folder.png</file>
+    </qresource>
+</RCC>
