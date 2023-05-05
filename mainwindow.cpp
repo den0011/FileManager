@@ -31,8 +31,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->treeView2->setDropIndicatorShown(true);
     ui->treeView2->setDragDropMode(QAbstractItemView::InternalMove);
 
-    ui->comboBox1->setToolTip("Update");
-
+    connect(ui->pushButtonNewFolderL, SIGNAL(clicked()), this, SLOT(pushButtonNewFolderLClik()));
+    connect(ui->pushButtonDelFolderL , SIGNAL(clicked()), this, SLOT(pushButtonDelFolderLClik()));
 
 }
 
@@ -41,6 +41,58 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::pushButtonNewFolderLClik()
+{
+
+    QString name = QInputDialog::getText(nullptr, "Добавить каталог", "Имя:");
+
+    if (! name.isEmpty())
+    {
+        QModelIndex index = ui->treeView1->currentIndex();
+        if (index.isValid())
+        {
+
+            QString path = ui->treeView1->model()->data(index, QFileSystemModel::FilePathRole).toString();
+            qDebug() << "Selected path:" << path;
+
+            QDir currentDir(path);
+                      if (currentDir.mkdir(name))
+                      {
+                             qDebug() << "ok";
+                      }
+        }
+
+    }
+
+}
+
+void MainWindow::pushButtonDelFolderLClik()
+{
+    QModelIndex index = ui->treeView1->currentIndex();
+    if (index.isValid())
+    {
+        QString path = ui->treeView1->model()->data(index, QFileSystemModel::FilePathRole).toString();
+
+       int v = QMessageBox::question(this, "Удалить ?",QString("%1").arg(path));
+
+       if (v == QMessageBox::Yes)
+       {
+           QDir dir(path);
+
+           if (dir.exists()) {
+               if (dir.removeRecursively()) {
+                   qDebug() << "Каталог успешно удален";
+               } else {
+                   qDebug() << "Не удалось удалить каталог";
+               }
+           } else {
+               qDebug() << "Каталог не существует";
+           }
+       }
+
+
+    }
+}
 
 void MainWindow::comboBoxActivated1(int index)
 {
@@ -67,7 +119,7 @@ void MainWindow::comboBoxActivated1(int index)
     qDebug() << "fileSystemType:" << storage.fileSystemType();
     qDebug() << "size:" << storage.bytesTotal()/1024/1024/1024 << "MB";
     qDebug() << "availableSize:" << storage.bytesAvailable()/1024/1024/1024 << "MB";
-        qDebug() << "Free space:" << storage.bytesFree()/1024/1024/1024 << "MB";
+    qDebug() << "Free space:" << storage.bytesFree()/1024/1024/1024 << "MB";
 
 }
 

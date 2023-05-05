@@ -8,6 +8,9 @@
 #include <QDebug>
 #include <QStorageInfo>
 #include <QDragEnterEvent>
+#include <QInputDialog>
+#include <QMessageBox>
+
 
 namespace Ui {
 class MainWindow;
@@ -32,6 +35,8 @@ private:
 private slots:
     void comboBoxActivated1(int index);
     void comboBoxActivated2(int index);
+    void pushButtonNewFolderLClik();
+    void pushButtonDelFolderLClik();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event);
