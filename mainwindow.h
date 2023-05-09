@@ -11,6 +11,7 @@
 #include <QInputDialog>
 #include <QMessageBox>
 
+#include "threadpoolmanager.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,6 +30,8 @@ private:
 
     QFileSystemModel model1;
     QFileSystemModel model2;
+
+    ThreadPoolManager manager;
 
     void Update1();
 

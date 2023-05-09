@@ -34,6 +34,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButtonNewFolderL, SIGNAL(clicked()), this, SLOT(pushButtonNewFolderLClik()));
     connect(ui->pushButtonDelFolderL , SIGNAL(clicked()), this, SLOT(pushButtonDelFolderLClik()));
 
+/*      ThreadPoolManager manager;
+        manager.setMaxThreadCount(4);
+*/
+
+
 }
 
 MainWindow::~MainWindow()
