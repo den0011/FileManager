@@ -40,6 +40,8 @@ private slots:
     void comboBoxActivated2(int index);
     void pushButtonNewFolderLClik();
     void pushButtonDelFolderLClik();
+    void pushButtonNewFolderRClik();
+    void pushButtonDelFolderRClik();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event);

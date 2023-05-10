@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -34,24 +35,80 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButtonNewFolderL, SIGNAL(clicked()), this, SLOT(pushButtonNewFolderLClik()));
     connect(ui->pushButtonDelFolderL , SIGNAL(clicked()), this, SLOT(pushButtonDelFolderLClik()));
 
-/*      ThreadPoolManager manager;
+    connect(ui->pushButtonNewFolderR, SIGNAL(clicked()), this, SLOT(pushButtonNewFolderRClik()));
+    connect(ui->pushButtonDelFolderR , SIGNAL(clicked()), this, SLOT(pushButtonDelFolderRClik()));
+
+    /*      ThreadPoolManager manager;
         manager.setMaxThreadCount(4);
 */
 
-
 }
+
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
+void MainWindow::pushButtonNewFolderRClik()
+{
+    bool ok;
+    QString name = QInputDialog::getText(this, "Создать каталог", "Имя:" ,QLineEdit::Normal,QString(),&ok, Qt::Window | Qt::WindowCloseButtonHint);
+
+    if (ok && !name.isEmpty())
+    {
+        QModelIndex index = ui->treeView2->currentIndex();
+        if (index.isValid())
+        {
+
+            QString path = ui->treeView2->model()->data(index, QFileSystemModel::FilePathRole).toString();
+            qDebug() << "Selected path:" << path;
+
+            QDir currentDir(path);
+            if (currentDir.mkdir(name))
+            {
+                qDebug() << "ok";
+            }
+        }
+
+    }
+}
+
+void MainWindow::pushButtonDelFolderRClik()
+{
+    QModelIndex index = ui->treeView2->currentIndex();
+    if (index.isValid())
+    {
+        QString path = ui->treeView2->model()->data(index, QFileSystemModel::FilePathRole).toString();
+
+        int v = QMessageBox::question(this, "Удалить ?",QString("%1").arg(path));
+
+        if (v == QMessageBox::Yes)
+        {
+            QDir dir(path);
+
+            if (dir.exists()) {
+                if (dir.removeRecursively()) {
+                    qDebug() << "Каталог успешно удален";
+                } else {
+                    qDebug() << "Не удалось удалить каталог";
+                }
+            } else {
+                qDebug() << "Каталог не существует";
+            }
+        }
+
+
+    }
+}
+
 void MainWindow::pushButtonNewFolderLClik()
 {
+    // Qt::Window     | Qt::WindowCloseButtonHint
+    bool ok;
+    QString name = QInputDialog::getText(this, "Создать каталог", "Имя:" ,QLineEdit::Normal,QString(),&ok, Qt::Window | Qt::WindowCloseButtonHint);
 
-    QString name = QInputDialog::getText(nullptr, "Добавить каталог", "Имя:");
-
-    if (! name.isEmpty())
+    if (ok && !name.isEmpty())
     {
         QModelIndex index = ui->treeView1->currentIndex();
         if (index.isValid())
@@ -61,10 +118,10 @@ void MainWindow::pushButtonNewFolderLClik()
             qDebug() << "Selected path:" << path;
 
             QDir currentDir(path);
-                      if (currentDir.mkdir(name))
-                      {
-                             qDebug() << "ok";
-                      }
+            if (currentDir.mkdir(name))
+            {
+                qDebug() << "ok";
+            }
         }
 
     }
@@ -78,22 +135,22 @@ void MainWindow::pushButtonDelFolderLClik()
     {
         QString path = ui->treeView1->model()->data(index, QFileSystemModel::FilePathRole).toString();
 
-       int v = QMessageBox::question(this, "Удалить ?",QString("%1").arg(path));
+        int v = QMessageBox::question(this, "Удалить ?",QString("%1").arg(path));
 
-       if (v == QMessageBox::Yes)
-       {
-           QDir dir(path);
+        if (v == QMessageBox::Yes)
+        {
+            QDir dir(path);
 
-           if (dir.exists()) {
-               if (dir.removeRecursively()) {
-                   qDebug() << "Каталог успешно удален";
-               } else {
-                   qDebug() << "Не удалось удалить каталог";
-               }
-           } else {
-               qDebug() << "Каталог не существует";
-           }
-       }
+            if (dir.exists()) {
+                if (dir.removeRecursively()) {
+                    qDebug() << "Каталог успешно удален";
+                } else {
+                    qDebug() << "Не удалось удалить каталог";
+                }
+            } else {
+                qDebug() << "Каталог не существует";
+            }
+        }
 
 
     }

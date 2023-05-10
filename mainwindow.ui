@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>793</width>
+    <width>998</width>
     <height>588</height>
    </rect>
   </property>
@@ -96,7 +96,11 @@
              <string>Удаление каталога и всех файлов</string>
             </property>
             <property name="text">
-             <string>PushButton</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="res.qrc">
+              <normaloff>:/icon/res/remove.png</normaloff>:/icon/res/remove.png</iconset>
             </property>
            </widget>
           </item>
@@ -187,6 +191,34 @@
             </property>
            </spacer>
           </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonNewFolderR">
+            <property name="toolTip">
+             <string>Создать новый каталог</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="res.qrc">
+              <normaloff>:/icon/res/add-folder.png</normaloff>:/icon/res/add-folder.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonDelFolderR">
+            <property name="toolTip">
+             <string>Удаление каталога и всех файлов</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="res.qrc">
+              <normaloff>:/icon/res/remove.png</normaloff>:/icon/res/remove.png</iconset>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -226,7 +258,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>793</width>
+     <width>998</width>
      <height>21</height>
     </rect>
    </property>
