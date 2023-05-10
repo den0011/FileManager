@@ -17,7 +17,10 @@ SOURCES += \
         threadpoolmanager.cpp
 
 HEADERS += \
+        copythread.hpp \
+        deletedirectorythread.hpp \
         mainwindow.h \
+        movedirthread.hpp \
         threadpoolmanager.h
 
 FORMS += \
